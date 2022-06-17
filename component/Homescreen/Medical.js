@@ -1,65 +1,72 @@
 import React, { useEffect, useState } from "react";
 import {
-    Text,
-    View,
-    ActivityIndicator,
-    ScrollView,
-    Dimensions,
-    Image,
-    Linking,
-    Button,
+  Text,
+  View,
+  ActivityIndicator,
+  ScrollView,
+  Dimensions,
+  Image,
+  Linking,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
 } from "react-native";
+import Card from "../../assets/Card";
 
-import  { MainFontColor,MainAppColor, DarkAppColor, blue } from "../../assets/Color"
+import {
+  MainFontColor,
+  MainAppColor,
+  DarkAppColor,
+  blue,
+} from "../../assets/Color";
 
-export default function App() {
-    console.log("Medical")
+export default function Medical() {
+  const [list, setList] = useState([]);
+  async function fetchUrl() {
+    const URL =
+      "https://exlfit6t23.execute-api.us-east-1.amazonaws.com/ver1/hospital-list";
+    let res = await fetch(URL);
+    let data = await res.json();
+    setList(data["data"]);
+  }
 
-    const URL = "https://i.pinimg.com/originals/be/f5/d0/bef5d0e27b11ccc40b0a1793047bc769.png";
-
-    return (
-
-        <View style={{ flex: 1, padding: 5, width: Dimensions.get("window").width , borderBottomWidth:5,borderColor: MainAppColor,paddingBottom:20}}>
-            <View style={{ alignItems: "center", justifyContent: "center" }}><Text style={{ fontSize: 20, borderBottomWidth: 2,color:"white",borderColor:"white" }}>Not Feeling well !!</Text></View>
-            <View style={{
-                padding: 5, alignItems: "center",
-                height: 170, flexDirection: "row",
-            }}>
-                <Image
-                    style={{ width: 150, height: 150, marginTop: 0 }}
-                    source={{ uri: URL }}
-                />
-                <View style={{ marginLeft: 20, flex: 1 }}>
-                    <Text style={{ fontSize: 15, fontWeight: "bold",color:MainFontColor }}>Get a Doctor on Call</Text>
-                    <Text style={{ fontSize: 15, fontWeight: "bold",color:MainFontColor }}>Free consultations. </Text>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-
-
-                    </View>
-
-                </View>
-
-
-
-
-
-
-            </View>
-            <View>
-                <View style={{ alignItems: "center", justifyContent: "center", marginBottom: 5 }}><Text style={{ color: "red", fontSize: 12 }}>{"For Emergency please Visit Nearest Hospital/call: 111 "} </Text></View>
-
-            </View>
-            <Button
-                title="SCHEDULE NOW!!"
-                color= {MainAppColor}
-
-                onPress={() =>
-                    Linking.openURL(
-                        `whatsapp://send?phone=${918521954141}&text=${"HII: ,\nWANT TO SHEDULE ,\nA CALL WITH DOCTOR.\n"
-                        }`
-                    )
-                }
-            />
-        </View>
-    );
+  fetchUrl();
+  return (
+    <View
+      style={{
+        justifyContent: "center",
+        paddingLeft: 45,
+      }}
+    >
+      {list.map((item, index) => {
+        return (
+          <View key={index}>
+            <TouchableOpacity>
+              <View style={styles.card}>
+                <Text style={{ fontSize: 20, color: "white" }}>
+                  {item.Name}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        );
+      })}
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    marginVertical: 15,
+    maxWidth: "90%",
+    alignItems: "center",
+    shadowColor: "black",
+    backgroundColor: MainAppColor,
+    shadowOpacity: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+    elevation: 8,
+    padding: 10,
+    borderRadius: 10,
+  },
+});

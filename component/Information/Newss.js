@@ -21,7 +21,6 @@ import {
 } from "../../assets/Color";
 
 import * as WebBrowser from "expo-web-browser";
-import AutoScroll from "./AutoScroll";
 
 export default function App() {
   const [isLoadingTop, setLoadingTop] = useState(true);

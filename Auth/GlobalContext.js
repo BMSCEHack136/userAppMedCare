@@ -1,39 +1,26 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 const GlobalContext = createContext();
 
+const GlobalData = (props) => {
+  // ----------------------------------------------------------------------------------------------------
 
-const GlobalData = props => {
+  const [status, setStatus] = useState(true);
+  const [patient, setPatientId] = useState("");
 
-    // ----------------------------------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------------------------------
 
-    // Variables for UserData.
-    const [status, setStatus] = useState(true)
-
-    // ----------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    return (
-
-        <GlobalContext.Provider value={{
-            status, setStatus
-
-
-        }}>
-            {props.children}
-        </GlobalContext.Provider>
-    );
+  return (
+    <GlobalContext.Provider
+      value={{
+        status,
+        setStatus,
+        patient,
+        setPatientId,
+      }}
+    >
+      {props.children}
+    </GlobalContext.Provider>
+  );
 };
 
 export { GlobalData, GlobalContext };

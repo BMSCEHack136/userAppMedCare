@@ -12,6 +12,8 @@ import Home from "./Screens/Home";
 import Ecom from "./Screens/Ecom";
 import { blue, DarkAppColor, MainAppColor } from "./assets/Color";
 import { BottomNavigation, Text } from "react-native-paper";
+import Signup from "./Auth/Signup";
+import { GlobalContext } from "./Auth/GlobalContext";
 
 function HomeScreen() {
   return <Home />;
@@ -38,6 +40,8 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
 );
 
 const App = () => {
+  const [patientId, setId] = React.useState("");
+
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "home", title: "Home", icon: "home" },
@@ -52,27 +56,34 @@ const App = () => {
     info: Information,
     ecommers: ecom,
   });
-  console.log("App");
+  console.log("App1");
 
-  return (
-    <View style={{ flex: 1 }}>
+  if (true) {
+    return (
       <View style={{ flex: 1 }}>
-        <MyStatusBar backgroundColor={DarkAppColor} barStyle="light-content" />
+        <View style={{ flex: 1 }}>
+          <MyStatusBar
+            backgroundColor={DarkAppColor}
+            barStyle="light-content"
+          />
 
-        <BottomNavigation
-          navigationState={{ index, routes }}
-          onIndexChange={setIndex}
-          renderScene={renderScene}
-          activeColor="#02abde"
-          barStyle={{
-            backgroundColor: DarkAppColor,
-            borderTopWidth: 1,
-            borderTopColor: MainAppColor,
-          }}
-        />
+          <BottomNavigation
+            navigationState={{ index, routes }}
+            onIndexChange={setIndex}
+            renderScene={renderScene}
+            activeColor="#02abde"
+            barStyle={{
+              backgroundColor: DarkAppColor,
+              borderTopWidth: 1,
+              borderTopColor: MainAppColor,
+            }}
+          />
+        </View>
       </View>
-    </View>
-  );
+    );
+  } else {
+    return <Signup setId={setId} />;
+  }
 };
 
 const STATUSBAR_HEIGHT = StatusBar.currentHeight;

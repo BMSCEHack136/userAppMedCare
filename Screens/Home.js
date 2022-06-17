@@ -4,6 +4,7 @@ import Header from "../component/Homescreen/Header";
 import Weather from "../component/Homescreen/Weather";
 import Covid19 from "../component/Homescreen/Covid19";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import Medical from "../component/Homescreen/Medical";
 
 import { DarkAppColor, MainAppColor } from "../assets/Color";
 
@@ -39,6 +40,17 @@ export default function App() {
         <Header />
         <Weather />
         <Covid19 />
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: "bold",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          Book an Appointment
+        </Text>
+        <Medical />
       </ScrollView>
     </View>
   );
